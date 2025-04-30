@@ -76,6 +76,7 @@ export const en = {
   "alerts.resolved": "Resolved",
   "alerts.pending": "Pending",
   "alerts.new": "New Alert",
+  "alerts.description": "Monitor and manage system alerts and notifications",
 
   // Status
   "status.online": "Online",

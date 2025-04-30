@@ -76,6 +76,7 @@ export const th = {
   "alerts.resolved": "แก้ไขแล้ว",
   "alerts.pending": "รอดำเนินการ",
   "alerts.new": "การแจ้งเตือนใหม่",
+  "alerts.description": "ติดตามและจัดการการแจ้งเตือนและการแจ้งเตือนของระบบ",
 
   // Status
   "status.online": "ออนไลน์",

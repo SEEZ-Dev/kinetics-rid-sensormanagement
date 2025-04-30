@@ -85,38 +85,47 @@ export default function StationDetailsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Button variant="outline" size="icon" onClick={() => router.back()}>
-            <ArrowLeft className="h-4 w-4" />
+          <Button 
+            variant="outline" 
+            size="icon" 
+            onClick={() => router.back()}
+            className="!border-2 !border-primary !bg-white !text-primary !shadow-lg hover:!bg-primary hover:!text-white transition-all duration-200"
+          >
+            <ArrowLeft className="h-5 w-5" />
           </Button>
-          <h1 className="text-3xl font-bold tracking-tight">{station.name}</h1>
+          <h1 className="text-3xl font-extrabold tracking-tight drop-shadow-sm">{station.name}</h1>
           <StatusBadge status={station.status} />
         </div>
-        <Button variant="outline" onClick={handleExportData} className="gap-2">
-          <Download className="h-4 w-4" />
+        <Button 
+          variant="outline" 
+          onClick={handleExportData} 
+          className="gap-2 !border-2 !border-primary !bg-primary !text-white !shadow-lg hover:!bg-white hover:!text-primary transition-all duration-200 font-semibold px-6 py-2 rounded-lg"
+        >
+          <Download className="h-5 w-5" />
           {t("app.export")}
         </Button>
       </div>
 
       {/* Station Info Card */}
-      <Card className="bg-gradient-to-r from-primary/10 to-transparent border-primary/20">
+      <Card className="bg-gradient-to-r from-primary/10 to-transparent border-primary/20 shadow-xl rounded-2xl">
         <CardHeader className="pb-2">
-          <CardTitle>{language === "en" ? "Station Information" : "ข้อมูลสถานี"}</CardTitle>
+          <CardTitle className="text-xl font-bold">{language === "en" ? "Station Information" : "ข้อมูลสถานี"}</CardTitle>
           <CardDescription>
-            {language === "en" ? "LSI LASTEM sensors deployed at this location" : "เซ็นเซอร์ LSI LASTEM ที่ติดตั้ง ณ ตำแหน่งนี้"}
+            {language === "en"
+              ? "LSI LASTEM sensors deployed at this location"
+              : "เซ็นเซอร์ LSI LASTEM ที่ติดตั้ง ณ ตำแหน่งนี้"}
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="flex items-start gap-3 bg-background/80 p-3 rounded-md">
-              <div className="bg-primary/10 p-2 rounded-md">
-                <Thermometer className="h-5 w-5 text-primary" />
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="flex items-start gap-3 bg-background/80 p-4 rounded-xl shadow-md border border-primary/10">
+              <div className="bg-primary/10 p-3 rounded-lg">
+                <Thermometer className="h-6 w-6 text-primary" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h4 className="font-medium">ISMMA2300</h4>
-                  <Badge variant="outline" className="text-xs">
-                    ET₀ Set
-                  </Badge>
+                  <h4 className="font-semibold text-base">ISMMA2300</h4>
+                  <Badge variant="outline" className="text-xs border-primary text-primary bg-primary/10">ET₀ Set</Badge>
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">
                   {language === "en"
@@ -125,16 +134,14 @@ export default function StationDetailsPage() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-background/80 p-3 rounded-md">
-              <div className="bg-primary/10 p-2 rounded-md">
-                <Cloud className="h-5 w-5 text-primary" />
+            <div className="flex items-start gap-3 bg-background/80 p-4 rounded-xl shadow-md border border-primary/10">
+              <div className="bg-primary/10 p-3 rounded-lg">
+                <Cloud className="h-6 w-6 text-primary" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h4 className="font-medium">DQA230.1</h4>
-                  <Badge variant="outline" className="text-xs">
-                    Rain Gauge
-                  </Badge>
+                  <h4 className="font-semibold text-base">DQA230.1</h4>
+                  <Badge variant="outline" className="text-xs border-blue-500 text-blue-700 bg-blue-100">Rain Gauge</Badge>
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">
                   {language === "en"
@@ -198,18 +205,26 @@ export default function StationDetailsPage() {
       </div>
 
       {/* Historical Data */}
-      <Card>
+      <Card className="card-hover">
         <CardHeader>
-          <CardTitle>{t("stations.history")}</CardTitle>
+          <CardTitle className="text-xl font-bold">{t("stations.history")}</CardTitle>
+          <CardDescription>
+            {language === "en" ? "Sensor data visualization and trends" : "การแสดงผลข้อมูลและแนวโน้มของเซ็นเซอร์"}
+          </CardDescription>
         </CardHeader>
         <CardContent>
-          <Tabs defaultValue="7" onValueChange={handlePeriodChange}>
-            <TabsList className="mb-4">
-              <TabsTrigger value="7">{t("stations.period.7days")}</TabsTrigger>
-              <TabsTrigger value="30">{t("stations.period.30days")}</TabsTrigger>
+          <Tabs defaultValue="7" onValueChange={handlePeriodChange} className="space-y-4">
+            <TabsList className="grid w-[400px] grid-cols-2">
+              <TabsTrigger value="7" className="text-base">
+                {t("stations.period.7days")}
+              </TabsTrigger>
+              <TabsTrigger value="30" className="text-base">
+                {t("stations.period.30days")}
+              </TabsTrigger>
             </TabsList>
-            <TabsContent value="7" className="space-y-4">
-              <div className="grid gap-4 md:grid-cols-2">
+
+            <TabsContent value="7" className="space-y-6">
+              <div className="grid gap-6 md:grid-cols-2">
                 <TrendChart
                   title={t("stations.et0")}
                   data={historicalData.map((item) => ({
@@ -218,7 +233,7 @@ export default function StationDetailsPage() {
                   }))}
                   yAxisLabel={t("units.et0")}
                   color="#f97316"
-                  height={250}
+                  height={300}
                 />
                 <TrendChart
                   title={t("stations.rainfall")}
@@ -227,11 +242,9 @@ export default function StationDetailsPage() {
                     value: item.rainfall,
                   }))}
                   yAxisLabel={t("units.rainfall")}
-                  color="#10b981"
-                  height={250}
+                  color="#0ea5e9"
+                  height={300}
                 />
-              </div>
-              <div className="grid gap-4 md:grid-cols-2">
                 <TrendChart
                   title={t("stations.water.level")}
                   data={historicalData.map((item) => ({
@@ -240,7 +253,7 @@ export default function StationDetailsPage() {
                   }))}
                   yAxisLabel={t("units.water.level")}
                   color="#3b82f6"
-                  height={250}
+                  height={300}
                 />
                 <TrendChart
                   title={t("sensors.temperature")}
@@ -250,56 +263,8 @@ export default function StationDetailsPage() {
                   }))}
                   yAxisLabel={t("units.temperature")}
                   color="#ef4444"
-                  height={250}
+                  height={300}
                 />
-              </div>
-            </TabsContent>
-            <TabsContent value="30" className="space-y-4">
-              <div className="grid gap-4 md:grid-cols-2">
-                <TrendChart
-                  title={t("stations.et0")}
-                  data={historicalData.map((item) => ({
-                    date: item.date,
-                    value: item.et0,
-                  }))}
-                  yAxisLabel={t("units.et0")}
-                  color="#f97316"
-                  height={250}
-                />
-                <TrendChart
-                  title={t("stations.rainfall")}
-                  data={historicalData.map((item) => ({
-                    date: item.date,
-                    value: item.rainfall,
-                  }))}
-                  yAxisLabel={t("units.rainfall")}
-                  color="#10b981"
-                  height={250}
-                />
-              </div>
-              <div className="grid gap-4 md:grid-cols-2">
-                <TrendChart
-                  title={t("stations.water.level")}
-                  data={historicalData.map((item) => ({
-                    date: item.date,
-                    value: item.waterLevel,
-                  }))}
-                  yAxisLabel={t("units.water.level")}
-                  color="#3b82f6"
-                  height={250}
-                />
-                <TrendChart
-                  title={t("sensors.temperature")}
-                  data={historicalData.map((item) => ({
-                    date: item.date,
-                    value: item.temperature,
-                  }))}
-                  yAxisLabel={t("units.temperature")}
-                  color="#ef4444"
-                  height={250}
-                />
-              </div>
-              <div className="grid gap-4 md:grid-cols-2">
                 <TrendChart
                   title={t("sensors.humidity")}
                   data={historicalData.map((item) => ({
@@ -307,8 +272,8 @@ export default function StationDetailsPage() {
                     value: item.humidity,
                   }))}
                   yAxisLabel={t("units.humidity")}
-                  color="#3b82f6"
-                  height={250}
+                  color="#6366f1"
+                  height={300}
                 />
                 <TrendChart
                   title={t("sensors.wind")}
@@ -318,7 +283,92 @@ export default function StationDetailsPage() {
                   }))}
                   yAxisLabel={t("units.wind")}
                   color="#64748b"
-                  height={250}
+                  height={300}
+                />
+                <TrendChart
+                  title={t("sensors.solar")}
+                  data={historicalData.map((item) => ({
+                    date: item.date,
+                    value: item.solarRadiation,
+                  }))}
+                  yAxisLabel={t("units.solar")}
+                  color="#eab308"
+                  height={300}
+                />
+              </div>
+            </TabsContent>
+
+            <TabsContent value="30" className="space-y-6">
+              <div className="grid gap-6 md:grid-cols-2">
+                <TrendChart
+                  title={t("stations.et0")}
+                  data={historicalData.map((item) => ({
+                    date: item.date,
+                    value: item.et0,
+                  }))}
+                  yAxisLabel={t("units.et0")}
+                  color="#f97316"
+                  height={300}
+                />
+                <TrendChart
+                  title={t("stations.rainfall")}
+                  data={historicalData.map((item) => ({
+                    date: item.date,
+                    value: item.rainfall,
+                  }))}
+                  yAxisLabel={t("units.rainfall")}
+                  color="#0ea5e9"
+                  height={300}
+                />
+                <TrendChart
+                  title={t("stations.water.level")}
+                  data={historicalData.map((item) => ({
+                    date: item.date,
+                    value: item.waterLevel,
+                  }))}
+                  yAxisLabel={t("units.water.level")}
+                  color="#3b82f6"
+                  height={300}
+                />
+                <TrendChart
+                  title={t("sensors.temperature")}
+                  data={historicalData.map((item) => ({
+                    date: item.date,
+                    value: item.temperature,
+                  }))}
+                  yAxisLabel={t("units.temperature")}
+                  color="#ef4444"
+                  height={300}
+                />
+                <TrendChart
+                  title={t("sensors.humidity")}
+                  data={historicalData.map((item) => ({
+                    date: item.date,
+                    value: item.humidity,
+                  }))}
+                  yAxisLabel={t("units.humidity")}
+                  color="#6366f1"
+                  height={300}
+                />
+                <TrendChart
+                  title={t("sensors.wind")}
+                  data={historicalData.map((item) => ({
+                    date: item.date,
+                    value: item.windSpeed,
+                  }))}
+                  yAxisLabel={t("units.wind")}
+                  color="#64748b"
+                  height={300}
+                />
+                <TrendChart
+                  title={t("sensors.solar")}
+                  data={historicalData.map((item) => ({
+                    date: item.date,
+                    value: item.solarRadiation,
+                  }))}
+                  yAxisLabel={t("units.solar")}
+                  color="#eab308"
+                  height={300}
                 />
               </div>
             </TabsContent>

@@ -1,21 +1,9 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
-import type { Station } from "@/types"
+import type { Station, HistoricalData } from "@/types"
 import { stations } from "@/mock/stations"
 import { generateHistoricalData } from "@/mock/historical-data"
-
-// Define the HistoricalData type
-interface HistoricalData {
-  timestamp: string
-  et0: number
-  rainfall: number
-  waterLevel: number
-  temperature: number
-  humidity: number
-  windSpeed: number
-  solarRadiation: number
-}
 
 export function useSensorData() {
   const [allStations, setAllStations] = useState<Station[]>(stations)

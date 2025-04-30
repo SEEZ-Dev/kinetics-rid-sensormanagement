@@ -29,12 +29,25 @@ export function TrendChart({
   const backgroundColor = isDark ? "#1e293b" : "#ffffff"
 
   return (
-    <Card className="border-primary/20 overflow-hidden">
+    <Card className="border-primary/20 overflow-hidden card-hover">
       <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium">{title}</CardTitle>
+        <CardTitle className="text-sm font-medium flex items-center justify-between">
+          <span>{title}</span>
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <span className="inline-flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: color }} />
+              Latest: {data[data.length - 1]?.value.toFixed(2)}
+            </span>
+            <span className="inline-flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-primary/30" />
+              Avg: {(data.reduce((acc, curr) => acc + curr.value, 0) / data.length).toFixed(2)}
+            </span>
+          </div>
+        </CardTitle>
       </CardHeader>
       <CardContent className="p-0">
-        <div style={{ height }}>
+        <div style={{ height }} className="relative group">
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none" />
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={data} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
               <defs>
@@ -42,8 +55,15 @@ export function TrendChart({
                   <stop offset="5%" stopColor={color} stopOpacity={0.8} />
                   <stop offset="95%" stopColor={color} stopOpacity={0} />
                 </linearGradient>
+                <filter id="shadow">
+                  <feDropShadow dx="0" dy="1" stdDeviation="2" floodOpacity="0.2" />
+                </filter>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
+              <CartesianGrid 
+                strokeDasharray="3 3" 
+                stroke={gridColor} 
+                vertical={false}
+              />
               <XAxis
                 dataKey="date"
                 tick={{ fontSize: 12, fill: textColor }}
@@ -51,9 +71,15 @@ export function TrendChart({
                   const date = new Date(value)
                   return `${date.getDate()}/${date.getMonth() + 1}`
                 }}
+                stroke={textColor}
+                axisLine={{ stroke: gridColor }}
+                tickLine={{ stroke: gridColor }}
               />
               <YAxis
                 tick={{ fontSize: 12, fill: textColor }}
+                stroke={textColor}
+                axisLine={{ stroke: gridColor }}
+                tickLine={{ stroke: gridColor }}
                 label={
                   yAxisLabel
                     ? {
@@ -78,6 +104,7 @@ export function TrendChart({
                   const date = new Date(label)
                   return date.toLocaleDateString()
                 }}
+                cursor={{ stroke: color, strokeWidth: 1 }}
               />
               <Area
                 type="monotone"
@@ -88,6 +115,7 @@ export function TrendChart({
                 fill={`url(#color-${title})`}
                 animationDuration={1000}
                 animationEasing="ease-in-out"
+                filter="url(#shadow)"
               />
             </AreaChart>
           </ResponsiveContainer>

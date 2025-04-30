@@ -183,67 +183,79 @@ export default function MapComponent({ stations }: MapComponentProps) {
 
             <Marker position={[station.location.lat, station.location.lng]} icon={getIcon(station.status, "weather")}>
               <Popup className="station-popup">
-                <div className="p-2 min-w-[300px]">
-                  <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white p-3 rounded-t-lg">
-                    <h3 className="font-bold text-xl text-center">{station.name}</h3>
+                <div className="p-2 min-w-[320px]">
+                  <div className="bg-gradient-to-br from-orange-500 to-amber-500 text-white p-4 rounded-t-lg">
+                    <h3 className="font-bold text-xl text-center mb-1">{station.name}</h3>
                     <p className="text-center text-sm opacity-90">ISMMA2300 Weather Station</p>
                   </div>
 
-                  <div className="p-3 border-x border-b rounded-b-lg border-orange-200 dark:border-orange-800 bg-white dark:bg-gray-900">
+                  <div className="p-4 border-x border-b rounded-b-lg border-orange-200 dark:border-orange-800 bg-white dark:bg-gray-900">
                     {getStatusBadge(station.status)}
 
                     <div className="my-4 space-y-3">
-                      <div className="bg-orange-50 dark:bg-orange-950/30 rounded-lg p-3 border border-orange-200 dark:border-orange-800">
-                        <div className="flex items-center justify-between mb-1">
+                      <div className="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/30 rounded-lg p-4 border border-orange-200 dark:border-orange-800">
+                        <div className="flex items-center justify-between mb-2">
                           <span className="font-medium text-orange-600 dark:text-orange-400">ISMMA2300</span>
                           <span className="text-sm text-gray-600 dark:text-gray-400">{t("sensors.temperature")}</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Thermometer className="h-5 w-5 text-orange-500" />
-                          <span className="text-xl font-bold">{station.sensors.temperature.toFixed(1)} °C</span>
-                        </div>
-                        <div className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                          ET₀: {station.sensors.et0.toFixed(2)} {t("units.et0")}
+                        <div className="flex items-center gap-3">
+                          <div className="bg-orange-100 dark:bg-orange-900/50 p-2 rounded-full">
+                            <Thermometer className="h-6 w-6 text-orange-500" />
+                          </div>
+                          <div>
+                            <span className="text-2xl font-bold">{station.sensors.temperature.toFixed(1)} °C</span>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">
+                              ET₀: {station.sensors.et0.toFixed(2)} {t("units.et0")}
+                            </div>
+                          </div>
                         </div>
                       </div>
 
-                      <div className="bg-slate-50 dark:bg-slate-950/30 rounded-lg p-3 border border-slate-200 dark:border-slate-800">
-                        <div className="flex items-center justify-between mb-1">
+                      <div className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950/30 dark:to-slate-900/30 rounded-lg p-4 border border-slate-200 dark:border-slate-800">
+                        <div className="flex items-center justify-between mb-2">
                           <span className="font-medium text-slate-600 dark:text-slate-400">ISMMA2300</span>
                           <span className="text-sm text-gray-600 dark:text-gray-400">{t("sensors.wind")}</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Wind className="h-5 w-5 text-slate-500" />
-                          <span className="text-xl font-bold">
-                            {station.sensors.windSpeed.toFixed(1)} {t("units.wind")}
-                          </span>
+                        <div className="flex items-center gap-3">
+                          <div className="bg-slate-100 dark:bg-slate-900/50 p-2 rounded-full">
+                            <Wind className="h-6 w-6 text-slate-500" />
+                          </div>
+                          <div>
+                            <span className="text-2xl font-bold">
+                              {station.sensors.windSpeed.toFixed(1)} {t("units.wind")}
+                            </span>
+                          </div>
                         </div>
                       </div>
 
-                      <div className="bg-yellow-50 dark:bg-yellow-950/30 rounded-lg p-3 border border-yellow-200 dark:border-yellow-800">
-                        <div className="flex items-center justify-between mb-1">
+                      <div className="bg-gradient-to-br from-yellow-50 to-amber-50 dark:from-yellow-950/30 dark:to-amber-950/30 rounded-lg p-4 border border-yellow-200 dark:border-yellow-800">
+                        <div className="flex items-center justify-between mb-2">
                           <span className="font-medium text-yellow-600 dark:text-yellow-400">ISMMA2300</span>
                           <span className="text-sm text-gray-600 dark:text-gray-400">{t("sensors.solar")}</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Sun className="h-5 w-5 text-yellow-500" />
-                          <span className="text-xl font-bold">
-                            {station.sensors.solarRadiation.toFixed(0)} {t("units.solar")}
-                          </span>
+                        <div className="flex items-center gap-3">
+                          <div className="bg-yellow-100 dark:bg-yellow-900/50 p-2 rounded-full">
+                            <Sun className="h-6 w-6 text-yellow-500" />
+                          </div>
+                          <div>
+                            <span className="text-2xl font-bold">
+                              {station.sensors.solarRadiation.toFixed(0)} {t("units.solar")}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2 mt-4">
-                      <Button asChild className="bg-orange-600 hover:bg-orange-700 text-white border-none">
+                    <div className="grid grid-cols-2 gap-3 mt-4">
+                      <Button asChild className="bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white border-none shadow-md">
                         <Link href={`/stations/details/${station.id}`}>
-                          <Info className="mr-1 h-4 w-4" />
+                          <Info className="mr-2 h-4 w-4" />
                           {t("stations.details")}
                         </Link>
                       </Button>
-                      <Button asChild className="bg-amber-600 hover:bg-amber-700 text-white border-none">
+                      <Button asChild className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white border-none shadow-md">
                         <Link href={`/stations/sensor-logs/${station.id}`}>
-                          <Thermometer className="mr-1 h-4 w-4" />
+                          <Thermometer className="mr-2 h-4 w-4" />
                           {language === "en" ? "Sensor Logs" : "บันทึกเซ็นเซอร์"}
                         </Link>
                       </Button>
@@ -288,7 +300,7 @@ export default function MapComponent({ stations }: MapComponentProps) {
                     <div className="my-4 space-y-3">
                       <div className="bg-blue-50 dark:bg-blue-950/30 rounded-lg p-3 border border-blue-200 dark:border-blue-800">
                         <div className="flex items-center justify-between mb-1">
-                          <span className="font-medium text-blue-600 dark:text-blue-400">DQA230.1</span>
+                          <span className="font-medium text-white">DQA230.1</span>
                           <span className="text-sm text-gray-600 dark:text-gray-400">{t("stations.rainfall")}</span>
                         </div>
                         <div className="flex items-center gap-2">
@@ -301,11 +313,11 @@ export default function MapComponent({ stations }: MapComponentProps) {
 
                       <div className="bg-indigo-50 dark:bg-indigo-950/30 rounded-lg p-3 border border-indigo-200 dark:border-indigo-800">
                         <div className="flex items-center justify-between mb-1">
-                          <span className="font-medium text-indigo-600 dark:text-indigo-400">DQA230.1</span>
+                          <span className="font-medium text-white">DQA230.1</span>
                           <span className="text-sm text-gray-600 dark:text-gray-400">{t("stations.water.level")}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Droplet className="h-5 w-5 text-indigo-600" />
+                          <Droplet className="h-5 w-5 text-white" />
                           <span className="text-xl font-bold">
                             {station.sensors.waterLevel.toFixed(2)} {t("units.water.level")}
                           </span>
@@ -314,7 +326,7 @@ export default function MapComponent({ stations }: MapComponentProps) {
                     </div>
 
                     <div className="grid grid-cols-2 gap-2 mt-4">
-                      <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white border-none">
+                      <Button asChild className="bg-blue-600 text-white border-none">
                         <Link href={`/stations/details/${station.id}`}>
                           <Info className="mr-1 h-4 w-4" />
                           {t("stations.details")}
