@@ -75,7 +75,7 @@ export default function LoginPage() {
               </div>
             </div>
             <CardTitle className="text-2xl text-center font-bold">{t("auth.login")}</CardTitle>
-            <CardDescription className="text-center text-base">ET₀ & Reservoir Monitoring System</CardDescription>
+            <CardDescription className="text-center text-base">Sensor & Reservoir Monitoring System</CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit}>
             <CardContent className="space-y-4">
@@ -124,7 +124,7 @@ export default function LoginPage() {
       </div>
 
       <footer className="p-4 text-center text-xs text-muted-foreground">
-        <p>© 2025 ET₀ & Reservoir Monitoring System</p>
+        <p>© 2025 Kenetic Monitoring System</p>
       </footer>
     </div>
   )

@@ -1,6 +1,6 @@
 export const en = {
   // Common
-  "app.title": "ET₀ & Reservoir Monitoring",
+  "app.title": "Kenetic Monitoring",
   "app.loading": "Loading...",
   "app.error": "An error occurred",
   "app.logout": "Logout",

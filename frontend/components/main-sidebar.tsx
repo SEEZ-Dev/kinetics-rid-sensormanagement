@@ -42,10 +42,6 @@ export function MainSidebar() {
   return (
     <div className="flex h-full w-[240px] flex-col border-r bg-muted/40 py-4">
       <div className="px-3 py-2">
-        <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-          <Droplets className="mr-2 inline-block h-5 w-5" />
-          ET₀ & Reservoir
-        </h2>
         <div className="space-y-1">
           {routes.map((route) => (
             <Button

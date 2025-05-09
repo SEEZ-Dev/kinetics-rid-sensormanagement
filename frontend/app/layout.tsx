@@ -9,9 +9,8 @@ import { LanguageProvider } from "@/components/language-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "ET₀ & Reservoir Monitoring System",
+  title: "Kenetic Monitoring System",
   description: "Real-Time IoT Monitoring System for Evapotranspiration and Reservoir Observation",
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({
