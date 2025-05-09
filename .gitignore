@@ -26,20 +26,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# next js + bun ignore
-.next
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
 # bun ignore
 .bunignore
 .bunfig.toml
 
-# bun ignore
-.bunignore
-.bunfig.toml
-
-node_modules
+# Make sure not to ignore lock files
+# node_modules is already ignored above
