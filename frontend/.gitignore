@@ -14,10 +14,4 @@
 .bunignore
 .bunfig.toml
 
-# bun ignore
-.bunignore
-.bunfig.toml
-
-# bun ignore
-.bunignore
-.bunfig.toml
+node_modules
